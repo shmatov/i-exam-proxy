@@ -19,7 +19,7 @@ function proxy(clientReq, clientRes) {
 function sendFile(path, response) {
     fs.stat(path, function(err, stats) {
         response.writeHead(200,  {
-            "content-type": mime.lookup(path),
+            "content-type": mime.lookup(path) + '; charset=utf-8',
             "content-length": stats.size
         });
         fs.createReadStream(path).pipe(response);
