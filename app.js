@@ -31,8 +31,9 @@ http.createServer(function (req, res) {
     if (path[0] !== '/') path = '/' + path;
     path = 'replace' + path;
     fs.exists(path, function (exists) {
+        exists = exists && path[path.length - 1] !== '/';
         console.log(path, exists);
-        if (exists && path[path.length - 1] !== '/') {
+        if (exists) {
             sendFile(path, res);
         } else {
             proxy(req, res);
