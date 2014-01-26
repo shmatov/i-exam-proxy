@@ -28,7 +28,8 @@ function sendFile(path, response) {
 
 http.createServer(function (req, res) {
     var path = req.url.indexOf(req.headers.host) > -1 ? req.url.split(req.headers.host)[1] : req.url;
-    if (path[0] == '/') path = path.substr(1);
+    if (path[0] !== '/') path = '/' + path;
+    path = 'replace' + path;
     fs.exists(path, function (exists) {
         console.log(path, exists)
         if (exists) {
